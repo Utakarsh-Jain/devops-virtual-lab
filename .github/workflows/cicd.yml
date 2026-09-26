@@ -13,15 +13,19 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build Docker Image
-        run: docker build -t devops-lab-app ./app
+        run: |
+          cd "${{ github.workspace }}"
+          docker build -t devops-lab-app ./app
 
       - name: Deploy to Kubernetes
         run: |
+          cd "${{ github.workspace }}"
           kubectl apply -f k8s/deployment.yml
           kubectl apply -f k8s/service.yml
 
       - name: Verify Deployment
         run: |
+          cd "${{ github.workspace }}"
           kubectl get deployments
           kubectl get pods
           kubectl get services
