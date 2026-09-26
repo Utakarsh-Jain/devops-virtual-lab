@@ -1,0 +1,5 @@
+*.pem
+*.tar
+.terraform/
+*.tfstate
+*.tfstate.*
